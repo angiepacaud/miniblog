@@ -2,21 +2,21 @@ blog_articles_homepage:
     path:     /
     defaults: { _controller: BlogArticlesBundle:Default:index }
 
-blog_Articles_view:
+blog_articles_view:
     path:      /articles/default/{id}
     defaults: { _controller: BlogArticlesBundle:Default:view }
     
-blog_Articles_add:
+blog_articles_add:
     path:      /articles/add
     defaults: { _controller: BlogArticlesBundle:Default:add }
 
-blog_Articles_edit:
+blog_articles_edit:
     path:      /articles/edit/{id}
     defaults: { _controller: BlogArticlesBundle:Default:edit }
     requirements:
         id: \d+
     
-blog_Articles_delete:
+blog_articles_delete:
     path:      /articles/delete/{id}
     defaults: { _controller: BlogArticlesBundle:Default:delete }
     requirements:
