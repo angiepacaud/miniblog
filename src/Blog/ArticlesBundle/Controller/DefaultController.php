@@ -2,6 +2,7 @@
 
 namespace Blog\ArticlesBundle\Controller;
 
+use OC\PlatformBundle\Entity\Articles;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,34 +52,40 @@ class DefaultController extends Controller
 
     public function viewAction($id)
   {
-	$advert = array(
- 	'title'   => 'Article 1',
-    'id'      => $id,
-    'author'  => 'User 1',
-    'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+	$repository = $this->getDoctrine()
 
-    );
+      ->getManager()
+      ->getRepository('BlogArticlesBundle:Default');
+
+    	$advert = $repository->find($id);
 
     return $this->render('BlogArticlesBundle:Default:view.html.twig', array(
       'advert' => $advert
-
     ));
-  
+
   }
 
 
    public function addAction(Request $request)
   {
 
+   // Création de l'entité
+    $advert = new Advert();
+    $advert->setTitle('Article 1.');
+    $advert->setAuthor('user 1');
+    $advert->setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+   
+    $em = $this->getDoctrine()->getManager();
+    $em->persist($advert);
+    $em->flush();
+
     if ($request->isMethod('POST')) {
+      $request->getSession()->getFlashBag()->add('notice', 'Article bien enregistré.');
 
-      $request->getSession()->getFlashBag()->add('article', 'Article bien enregistré.');
-
-      return $this->redirectToRoute('blog_articles_view', array('id' => 1));
-
+      return $this->redirectToRoute('blog_articles_view', array('id' => $advert->getId()));
     }
 
-    return $this->render('BlogArticlesBundle:Default:add.html.twig');
+    return $this->render('BlogArticlesBundle:Default:add.html.twig', array('advert' => $advert));
 
   }
 
