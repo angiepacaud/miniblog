@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Blog{% endblock %}</title>
+  </head>
+
+  <body>
+
+    {% block body %}
+  <div class="container">
+    <div id="header" class="jumbotron">
+      <h1>Listes d'articles</h1>
+    </div>
+
+    <div class="row">
+        <ul class="nav nav-pills nav-stacked">
+  {% for advert in listAdverts %}
+    <li>
+      <a href="{{ path('blog_articles_view', {'id': default.id}) }}">
+        {{ default.title }}
+      </a>
+    </li>
+  {% endfor %}
+</ul>
+      </div>
+      <div id="content" class="col-md-9">
+       
+      </div>
+    </div>
+
+    <hr>
+
+    
+  </div>
+
+    {% endblock %}
+
+  </body>
+</html>

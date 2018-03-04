@@ -1,31 +1,24 @@
-<!DOCTYPE html>
+{% extends "BlogArticlesBundle::layout.html.twig" %}
 
-<html>
+{% block title %}
+  Accueil - {{ parent() }}
+{% endblock %}
 
-  <head>
+{% block blogarticles_body %}
 
-    <title>Listes des articles</title>
+  <h2>Liste des articles</h2>
 
-  </head>
+  <ul>
+    {% for advert in listAdverts %}
+      <li>
+        <a href="{{ path('blog_articles_view', {'id': advert.id}) }}">
+          {{ advert.title }}
+        </a>
+        par {{ advert.author }}
+      </li>
+    {% else %}
+      <li>Pas (encore !) d'annonces</li>
+    {% endfor %}
+  </ul>
 
-  <body>
-
-    <h1>Hello {{ nom }} !</h1>
-
-
-    <p>
-
-<a href="{{ path('oc_platform_view', { 'id': advert_id }) }}">
-
-    Lien vers l'annonce d'id {{ advert_id }}
-
-    article 1 (lien)
-    article 2 (lien)
-
-</a>
-
-    </p>
-
-  </body>
-
-</html>
+{% endblock %}

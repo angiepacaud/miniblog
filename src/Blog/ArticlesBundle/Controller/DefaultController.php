@@ -10,7 +10,8 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-         $content = $this->get('templating')->render('BlogArticlesBundle:Default:index.html.twig', array('nom' => 'articles'));
+         $content = $this->get('templating')->render('BlogArticlesBundle:Default:index.html.twig', array('listAdverts' => array()
+         	));
     
     return new Response($content);
 
