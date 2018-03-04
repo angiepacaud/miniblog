@@ -4,6 +4,12 @@ namespace Blog\ArticlesBundle\Controller;
 
 use OC\PlatformBundle\Entity\Articles;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -69,25 +75,37 @@ class DefaultController extends Controller
    public function addAction(Request $request)
   {
 
-   // Création de l'entité
     $advert = new Advert();
-    $advert->setTitle('Article 1.');
-    $advert->setAuthor('user 1');
-    $advert->setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-   
-    $em = $this->getDoctrine()->getManager();
-    $em->persist($advert);
-    $em->flush();
+    $formBuilder = $this->get('form.factory')->createBuilder(FormType::class, $advert);
 
-    if ($request->isMethod('POST')) {
-      $request->getSession()->getFlashBag()->add('notice', 'Article bien enregistré.');
+    // On ajoute les champs 
+    $formBuilder
+      ->add('title',     TextType::class)
+      ->add('content',   TextareaType::class)
+      ->add('author',    TextType::class)
+      ->add('save',      SubmitType::class)
+      ->getForm()
+    ;
 
-      return $this->redirectToRoute('blog_articles_view', array('id' => $advert->getId()));
+     if ($request->isMethod('POST')) {
+      $form->handleRequest($request);
+      if ($form->isValid()) {
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($advert);
+        $em->flush();
+
+        $request->getSession()->getFlashBag()->add('notice', 'Article bien enregistré.');
+        return $this->redirectToRoute('blog_articles_view', array('id' => $advert->getId()));
+
+      }
     }
 
-    return $this->render('BlogArticlesBundle:Default:add.html.twig', array('advert' => $advert));
-
+    return $this->render('BlogArticlesBundle:Default:add.html.twig', array(
+      'form' => $form->createView(),
+    ));
   }
+  
 
 
   public function editAction($id, Request $request)
