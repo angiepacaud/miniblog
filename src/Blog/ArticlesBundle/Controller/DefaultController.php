@@ -9,7 +9,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-         $content = $this->get('templating')->render('BlogArticlesBundle:Default:index.html.twig', array('nom' => 'rete'));
+         $content = $this->get('templating')->render('BlogArticlesBundle:Default:index.html.twig', array('nom' => 'articles'));
     
     return new Response($content);
     }
