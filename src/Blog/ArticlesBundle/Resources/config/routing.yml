@@ -3,7 +3,7 @@ blog_articles_homepage:
     defaults: { _controller: BlogArticlesBundle:Default:index }
 
 blog_Articles_view:
-    path:      /articles/defaults/{id}
+    path:      /articles/default/{id}
     defaults: { _controller: BlogArticlesBundle:Default:view }
     
 blog_Articles_add:

@@ -3,6 +3,7 @@
 namespace Blog\ArticlesBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
@@ -13,4 +14,17 @@ class DefaultController extends Controller
     
     return new Response($content);
     }
+
+    public function viewAction($id, Request $request)
+
+  {
+	  $tag = $request->query->get('contenu');
+
+    return $this->render('BlogArticlesBundle:Default:view.html.twig', array(
+      'id'  => $id,
+      'contenu' => $tag,
+    ));
+  }
+
+
 }
