@@ -1,20 +1,17 @@
 {% extends "BlogArticlesBundle::layout.html.twig" %}
 
+{% block title %}
+ Ajouter un article - {{ parent() }}
+{% endblock %}
 
-{% block body %}
-
+{% block blogarticles_body %}
 
   <h2>Ajouter un article</h2>
 
-
   {{ include("BlogArticlesBundle:Default:form.html.twig") }}
 
-
   <p>
-
-    
-
+    Vous ajoutez un article.
   </p>
-
 
 {% endblock %}

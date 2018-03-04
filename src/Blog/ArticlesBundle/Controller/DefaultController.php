@@ -86,16 +86,24 @@ class DefaultController extends Controller
   public function editAction($id, Request $request)
   {
 
-    if ($request->isMethod('POST')) {
-
+   if ($request->isMethod('POST')) {
       $request->getSession()->getFlashBag()->add('notice', 'Article bien modifié.');
 
-      return $this->redirectToRoute('blog_articles_view', array('id' => 5));
-
+      return $this->redirectToRoute('blog_articles_view', array('id' => 1));
     }
 
-    return $this->render('BlogArticlesBundle:Default:edit.html.twig');
+    $advert = array(
+ 	'title'   => 'Article 1',
+    'id'      => $id,
+    'author'  => 'User 1',
+    'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
 
+    );
+
+    return $this->render('BlogArticlesBundle:Default:edit.html.twig', array(
+      'advert' => $advert
+
+    ));
   }
 
 

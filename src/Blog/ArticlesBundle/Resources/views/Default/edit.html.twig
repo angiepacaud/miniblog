@@ -1,0 +1,24 @@
+{% extends "BlogArticlesBundle::layout.html.twig" %}
+
+{% block title %}
+  Modifier un article - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+  <h2>Modifier un article</h2>
+
+  {{ include("BlogArticlesBundle:Default:form.html.twig") }}
+
+  <p>
+    Vous éditez un article.
+  </p>
+
+  <p>
+    <a href="{{ path('blog_articles_view', {'id': advert.id}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour à l'annonce
+    </a>
+  </p>
+
+{% endblock %}

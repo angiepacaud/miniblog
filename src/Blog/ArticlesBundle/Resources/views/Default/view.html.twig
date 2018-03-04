@@ -6,7 +6,7 @@ Article -{{ parent() }}
 {% endblock %}
 
 
-{% block blogarticles_body %}
+{% block body %}
  
  <h2>{{ advert.title }}</h2>
   <i>Par {{ advert.author }}</i>
@@ -16,7 +16,7 @@ Article -{{ parent() }}
   </div>
 
   <p>
-    <a href="{{ path('blog_articles_home') }}" class="btn btn-default">
+    <a href="{{ path('blog_articles_homepage') }}" class="btn btn-default">
       <i class="glyphicon glyphicon-chevron-left"></i>
       Retour à la liste
     </a>
