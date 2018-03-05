@@ -9,12 +9,12 @@
   <h2>Liste des articles</h2>
 
   <ul>
-    {% for advert in listAdverts %}
+    {% for articles in listArticles %}
       <li>
-        <a href="{{ path('blog_articles_view', {'id': advert.id}) }}">
+        <a href="{{ path('blog_articles_view', {'id': articles.id}) }}">
           {{ advert.title }}
         </a>
-        par {{ advert.author }}
+        par {{ articles.author }}
       </li>
     {% else %}
       <li>Pas (encore !) d'annonces</li>

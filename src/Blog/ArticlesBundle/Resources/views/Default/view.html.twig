@@ -8,11 +8,11 @@ Article -{{ parent() }}
 
 {% block body %}
  
- <h2>{{ advert.title }}</h2>
-  <i>Par {{ advert.author }}</i>
+ <h2>{{ articles.title }}</h2>
+  <i>Par {{ articles.author }}</i>
 
   <div class="well">
-    {{ advert.content }}
+    {{ articles.content }}
   </div>
 
   <p>
@@ -20,11 +20,11 @@ Article -{{ parent() }}
       <i class="glyphicon glyphicon-chevron-left"></i>
       Retour à la liste
     </a>
-    <a href="{{ path('blog_articles_edit', {'id': advert.id}) }}" class="btn btn-default">
+    <a href="{{ path('blog_articles_edit', {'id': articles.id}) }}" class="btn btn-default">
       <i class="glyphicon glyphicon-edit"></i>
       Modifier l'annonce
     </a>
-    <a href="{{ path('blog_articles_delete', {'id': advert.id}) }}" class="btn btn-danger">
+    <a href="{{ path('blog_articles_delete', {'id': articles.id}) }}" class="btn btn-danger">
       <i class="glyphicon glyphicon-trash"></i>
       Supprimer l'annonce
     </a>

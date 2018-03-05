@@ -1,12 +1,12 @@
 <ul class="nav nav-pills nav-stacked">
 
-  {% for advert in listAdverts %}
+  {% for articles in listArticles %}
 
     <li>
 
-      <a href="{{ path('blog_articles_view', {'id': advert.id}) }}">
+      <a href="{{ path('blog_articles_view', {'id': articles.id}) }}">
 
-        {{ advert.title }}
+        {{ articles.title }}
 
       </a>
 
