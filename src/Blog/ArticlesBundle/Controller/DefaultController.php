@@ -61,7 +61,7 @@ class DefaultController extends Controller
 	$repository = $this->getDoctrine()
 
       ->getManager()
-      ->getRepository('BlogArticlesBundle:Default');
+      ->getRepository('BlogArticlesBundle:Articles');
 
     	$articles = $repository->find($id);
 
