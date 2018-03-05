@@ -12,7 +12,7 @@
     {% for articles in listArticles %}
       <li>
         <a href="{{ path('blog_articles_view', {'id': articles.id}) }}">
-          {{ advert.title }}
+          {{ articles.title }}
         </a>
         par {{ articles.author }}
       </li>
