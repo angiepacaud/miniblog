@@ -69,9 +69,9 @@ class DefaultController extends Controller
       ->getRepository('BlogArticlesBundle:Articles');
 
     $articles = $repository->find($id);
-
-    dump($articles);
-    die();
+if(null === $articles){
+	throw new NotFoundHttpException("L'article" .$id. "n'existe pas.");
+}
 
     return $this->render('BlogArticlesBundle:Default:view.html.twig', array(
       'articles' => $articles
