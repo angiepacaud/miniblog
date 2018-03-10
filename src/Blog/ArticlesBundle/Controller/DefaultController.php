@@ -2,7 +2,7 @@
 
 namespace Blog\ArticlesBundle\Controller;
 
-use OC\PlatformBundle\Entity\Articles;
+use Blog\ArticlesBundle\Entity\Articles;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -17,6 +17,11 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
+    	$articles = new articles();
+    	$articles->settitle('Article 1');
+    	$articles->setauthor('User 1');
+    	$articles->setcontent('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.');
+    	
          $listArticles = array(
       array(
         'title'   => 'Article 1',
@@ -56,14 +61,17 @@ class DefaultController extends Controller
     ));
   }
 
-    public function viewAction($id)
+  public function viewAction($id)
   {
 	$repository = $this->getDoctrine()
 
       ->getManager()
       ->getRepository('BlogArticlesBundle:Articles');
 
-    	$articles = $repository->find($id);
+    $articles = $repository->find($id);
+
+    dump($articles);
+    die();
 
     return $this->render('BlogArticlesBundle:Default:view.html.twig', array(
       'articles' => $articles
