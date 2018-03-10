@@ -84,34 +84,48 @@ class DefaultController extends Controller
   {
 
     $articles = new Articles();
-    $formBuilder = $this->get('form.factory')->createBuilder(FormType::class, $articles);
+    $articles->setTitle('Article 1');
+    $articles->setAuthor('User 1');
+    $articles->setContent('Lorem ipsum dea fafg afgzag');
+    $em =$this->getDoctrine()->getManager();
+    $em->persist($articles);
+    $em->flush();
 
-    // On ajoute les champs 
-    $formBuilder
-      ->add('title',     TextType::class)
-      ->add('content',   TextareaType::class)
-      ->add('author',    TextType::class)
-      ->add('save',      SubmitType::class)
-      ->getForm()
-    ;
-
-     if ($request->isMethod('POST')) {
-      $form->handleRequest($request);
-      if ($form->isValid()) {
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($articles);
-        $em->flush();
-
-        $request->getSession()->getFlashBag()->add('notice', 'Article bien enregistré.');
-        return $this->redirectToRoute('blog_articles_view', array('id' => $articles->getId()));
-
-      }
+    if($request->isMethod('POST')){
+    	$request->getSession->getFlashBag()->add('notice', 'ok');
+    	return $this->redirectToRoute('blog_articles_view', array('id' => $articles->getId()));
     }
 
-    return $this->render('BlogArticlesBundle:Default:add.html.twig', array(
-      'form' => $form->createView(),
-    ));
+  return $this->render('BlogArticlesBundle:Default:add.html.twig', array('articles' => $articles));
+
+    // $formBuilder = $this->get('form.factory')->createBuilder(FormType::class, $articles);
+
+    // // On ajoute les champs 
+    // $formBuilder
+    //   ->add('title',     TextType::class)
+    //   ->add('content',   TextareaType::class)
+    //   ->add('author',    TextType::class)
+    //   ->add('save',      SubmitType::class)
+    //   ->getForm()
+    // ;
+
+    //  if ($request->isMethod('POST')) {
+    //   $form->handleRequest($request);
+    //   if ($form->isValid()) {
+
+    //     $em = $this->getDoctrine()->getManager();
+    //     $em->persist($articles);
+    //     $em->flush();
+
+    //     $request->getSession()->getFlashBag()->add('notice', 'Article bien enregistré.');
+    //     return $this->redirectToRoute('blog_articles_view', array('id' => $articles->getId()));
+
+    //   }
+    // }
+
+    // return $this->render('BlogArticlesBundle:Default:add.html.twig', array(
+    //   'form' => $form->createView(),
+    // ));
   }
   
 
